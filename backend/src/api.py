@@ -18,7 +18,8 @@ CORS(app)
 '''
 # db_drop_and_create_all()
 
-## ROUTES
+# ROUTES
+
 
 @app.route('/drinks')
 def get_drinks():
@@ -77,9 +78,9 @@ def patch_drink(drink_id):
             abort(404)
 
         if('title' in body):
-             drink.title=body['title']
+            drink.title = body['title']
         if('recipe' in body):
-            drink.recipe=json.dumps(body['recipe'])
+            drink.recipe = json.dumps(body['recipe'])
 
         drink.update()
 
@@ -112,14 +113,15 @@ def delete_drink(drink_id):
         abort(422)
 
 
-## Error Handling
+# Error Handling
 @app.errorhandler(422)
 def unprocessable(error):
     return jsonify({
-                    "success": False, 
-                    "error": 422,
-                    "message": "unprocessable"
-                    }), 422
+        "success": False,
+        "error": 422,
+        "message": "unprocessable"
+    }), 422
+
 
 @app.errorhandler(404)
 def not_found(error):
@@ -128,6 +130,7 @@ def not_found(error):
         "error": 404,
         "message": "resource not found"
     }), 404
+
 
 @app.errorhandler(AuthError)
 def handle_auth_errors(error):
